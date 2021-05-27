@@ -47,4 +47,13 @@ describe('Requirement 1, Testing App.js', () => {
       && thirdLinkText)
       .toBeInTheDocument();
   });
+
+  it('tests if when the Home Link is clicked the user ir redirected to a / pathname',
+    () => {
+      const { getByText, history } = renderWithRouter(<App />);
+      const firstLinkText = getByText(/Home/);
+      fireEvent.click(firstLinkText);
+      const { pathname } = history.location;
+      expect(pathname).toBe('/');
+    });
 });
