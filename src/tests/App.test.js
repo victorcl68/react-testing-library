@@ -74,4 +74,12 @@ describe('Requirement 1, Testing App.js', () => {
       const { pathname } = history.location;
       expect(pathname).toBe('/favorites');
     });
+
+  it('when some not known adress is used the user ir redirected to NotFound.js',
+    () => {
+      const { getByText, history } = renderWithRouter(<App />);
+      history.push('/qualquer-pagina/que-nao-exista/');
+      const noMatching = getByText(/Page requested not found/);
+      expect(noMatching).toBeInTheDocument();
+    });
 });
