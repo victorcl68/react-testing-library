@@ -56,4 +56,13 @@ describe('Requirement 1, Testing App.js', () => {
       const { pathname } = history.location;
       expect(pathname).toBe('/');
     });
+
+  it('when the About Link is clicked the user ir redirected to a /about pathname',
+    () => {
+      const { getByText, history } = renderWithRouter(<App />);
+      const secondLinkText = getByText(/About/);
+      fireEvent.click(secondLinkText);
+      const { pathname } = history.location;
+      expect(pathname).toBe('/about');
+    });
 });
