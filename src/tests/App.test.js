@@ -65,4 +65,13 @@ describe('Requirement 1, Testing App.js', () => {
       const { pathname } = history.location;
       expect(pathname).toBe('/about');
     });
+
+  it('when the Favorites Link is clicked the user ir redirected to a /favorites pathname',
+    () => {
+      const { getByText, history } = renderWithRouter(<App />);
+      const thirdLinkText = getByText(/Favorite Pokémons/);
+      fireEvent.click(thirdLinkText);
+      const { pathname } = history.location;
+      expect(pathname).toBe('/favorites');
+    });
 });
