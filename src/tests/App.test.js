@@ -23,4 +23,28 @@ describe('Requirement 1, Testing App.js', () => {
     );
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
+
+  it('tests if there are three links on the top of the application', () => {
+    const { getByText, getAllByRole } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+    const firstLink = getAllByRole('link')[0];
+    const secondLink = getAllByRole('link')[1];
+    const thirdLink = getAllByRole('link')[2];
+    const firstLinkText = getByText(/Home/);
+    const secondLinkText = getByText(/About/);
+    const thirdLinkText = getByText(/Favorite Pokémons/);
+    expect(firstLink).toBe(firstLinkText);
+    expect(secondLink).toBe(secondLinkText);
+    expect(thirdLink).toBe(thirdLinkText);
+    expect(firstLink
+      && secondLink
+      && thirdLink
+      && firstLinkText
+      && secondLinkText
+      && thirdLinkText)
+      .toBeInTheDocument();
+  });
 });
