@@ -1,7 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent } from '@testing-library/react';
-import renderWithRouter from '../renderWithRouter';
+import { render } from '@testing-library/react';
 import FavoritePokemons from '../components/FavoritePokemons';
 
 describe('Testing FavoritePokemons Component, Third Requirement', () => {
@@ -12,7 +11,8 @@ describe('Testing FavoritePokemons Component, Third Requirement', () => {
           <FavoritePokemons />
         </MemoryRouter>,
       );
-      const noPokemonMessage = getByText(/No favorite pokemon found/);
-      expect(noPokemonMessage).toBeInTheDocument();
+      const noFavoriteMessage = getByText(/No favorite pokemon found/);
+
+      expect(noFavoriteMessage).toBeInTheDocument();
     });
 });
