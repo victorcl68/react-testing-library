@@ -5,7 +5,7 @@ import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 describe('Requirement 1, Testing App.js', () => {
-  test('renders a reading with the text `Pokédex`', () => {
+  it('renders a reading with the text `Pokédex`', () => {
     const { getByText } = render(
       <MemoryRouter>
         <App />
@@ -15,7 +15,7 @@ describe('Requirement 1, Testing App.js', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('shows the Pokédex when the route is `/`', () => {
+  it('shows the Pokédex when the route is `/`', () => {
     const { getByText } = render(
       <MemoryRouter initialEntries={ ['/'] }>
         <App />
