@@ -21,7 +21,6 @@ describe('Requirement 1, Testing App.js', () => {
         <App />
       </MemoryRouter>,
     );
-
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
 });
