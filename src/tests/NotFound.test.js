@@ -16,4 +16,20 @@ describe('Testing NotFound Component, Fourth Requirement', () => {
 
       expect(notFoundMessage).toBeInTheDocument();
     });
+
+  it('tests if there is an image with the right source',
+    () => {
+      const { getByAltText } = render(
+        <MemoryRouter>
+          <NotFound />
+        </MemoryRouter>,
+      );
+
+      const imageAlt = getByAltText(
+        'Pikachu crying because the page requested was not found',
+      );
+
+      expect(imageAlt).toBeInTheDocument();
+      expect(imageAlt).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+    });
 });
