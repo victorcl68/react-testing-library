@@ -70,11 +70,12 @@ describe('Requirement 1, Testing App.js', () => {
   it('when "About" Link is clicked the user is redirected to /about pathname',
     () => {
       const { history } = renderWithRouter(<App />);
-      const { pathname } = history.location;
 
       userEvent.click(screen.getByRole('link', {
         name: 'About',
       }));
+
+      const { pathname } = history.location;
 
       expect(pathname).toBe('/about');
     });
@@ -82,11 +83,11 @@ describe('Requirement 1, Testing App.js', () => {
   it('when "Favorite Pokémons" is clicked the user is redirected to /favorites pathname',
     () => {
       const { history } = renderWithRouter(<App />);
-      const { pathname } = history.location;
 
       userEvent.click(screen.getByRole('link', {
         name: 'Favorite Pokémons',
       }));
+      const { pathname } = history.location;
 
       expect(pathname).toBe('/favorites');
     });
