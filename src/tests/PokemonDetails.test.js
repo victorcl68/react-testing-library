@@ -15,4 +15,19 @@ describe('Testing PokemonDetails Component, Seventh Requirement', () => {
 
     expect(MoreDetailsLink).toBeInTheDocument();
   });
+
+  it('the user is redirected to PokemonsDetails screen', () => {
+    const { history } = renderWithRouter(<App />);
+    const MoreDetailsLink = screen.getByRole('link', {
+      name: 'More details',
+    });
+
+    expect(MoreDetailsLink).toBeInTheDocument();
+
+    userEvent.click(MoreDetailsLink);
+
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/pokemons/25');
+  });
 });
