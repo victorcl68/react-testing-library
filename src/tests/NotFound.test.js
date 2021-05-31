@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { NotFound } from '../components';
+import NotFound from '../components/NotFound';
 
 describe('Testing NotFound Component, Fourth Requirement', () => {
   it('there is a heading level 2,whith a message: "Page requested not found"',
