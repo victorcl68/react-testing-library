@@ -86,5 +86,23 @@ describe('Testing PokemonDetails Component, Seventh Requirement', () => {
           name: 'Pikachu location',
         })[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
       });
+
+      it('details should have a checkbox with the right text', () => {
+        renderWithRouter(<App />);
+        const MoreDetailsLink = screen.getByRole('link', {
+          name: MoreDetails,
+        });
+
+        userEvent.click(MoreDetailsLink);
+
+        const checkboxFromRole = screen.getByRole('checkbox', {
+          name: 'Pokémon favoritado?',
+        });
+
+        const checkboxFromLabel = screen.getByLabelText('Pokémon favoritado?');
+
+        expect(checkboxFromRole).toBe(checkboxFromLabel);
+        expect(checkboxFromRole).toBeInTheDocument();
+      });
     });
 });
