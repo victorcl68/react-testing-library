@@ -24,7 +24,27 @@ describe('Testing Pokemon Component, Sixth Requirement', () => {
 
         expect(screen.getAllByRole('img', {
           name: 'Pikachu sprite',
-        })[0]).toBeInTheDocument();
+        })[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+      });
+
+      it('there is a star icon on favorite Pokemons and the pathname is correct', () => {
+        const { history } = renderWithRouter(<App />);
+        const MoreDetailsLink = screen.getByRole('link', {
+          name: MoreDetails,
+        });
+
+        userEvent.click(MoreDetailsLink);
+
+        const { pathname } = history.location;
+        expect(pathname).toBe('/pokemons/25');
+
+        const checkboxFromLabel = screen.getByLabelText('Pokémon favoritado?');
+
+        userEvent.click(checkboxFromLabel);
+
+        expect(screen.getByRole('img', {
+          name: 'Pikachu is marked as favorite',
+        })).toHaveAttribute('src', '/star-icon.svg');
       });
     });
 });
