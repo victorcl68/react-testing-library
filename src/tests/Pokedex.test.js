@@ -4,152 +4,137 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-describe('Testing Pokedex Component, Fifth Requirement', () => {
+describe('Testing Pokedex/App Component, Fifth Requirement', () => {
   const proximoPokemon = 'Próximo pokémon';
-  const EncounteredPokemons = 'Encountered pokémons';
-  it('There is a hh2 title with the "Encountered pokémons" text', () => {
+  it('There is an h2 title with the "Encountered pokémons" text', () => {
     renderWithRouter(<App />);
     const EncounteredPokemonsLink = screen.getByRole('heading', {
       level: 2,
-      name: EncounteredPokemons,
+      name: 'Encountered pokémons',
     });
 
     expect(EncounteredPokemonsLink).toBeInTheDocument();
   });
-  it('the button has a text "Próximo pokémon"', () => {
-    renderWithRouter(<App />);
-    const buttonNextPokemon = screen.getByRole('link', {
-      name: proximoPokemon,
+  it('the next pokemon is showed when the right button is clicked" and one at time',
+    () => {
+      renderWithRouter(<App />);
+      const buttonNextPokemon = screen.getByRole('button', {
+        name: proximoPokemon,
+      });
+      expect(buttonNextPokemon).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Charmander = screen.getByText('Charmander');
+      expect(Charmander).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Caterpie = screen.getByText('Caterpie');
+      expect(Caterpie).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Ekans = screen.getByText('Ekans');
+      expect(Ekans).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Alakazam = screen.getByText('Alakazam');
+      expect(Alakazam).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Mew = screen.getByText('Mew');
+      expect(Mew).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Rapidash = screen.getByText('Rapidash');
+      expect(Rapidash).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Snorlax = screen.getByText('Snorlax');
+      expect(Snorlax).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Dragonair = screen.getByText('Dragonair');
+      expect(Dragonair).toBeInTheDocument();
+
+      userEvent.click(buttonNextPokemon);
+      const Pikachu = screen.getByText('Pikachu');
+      expect(Pikachu).toBeInTheDocument();
     });
-
-    expect(buttonNextPokemon).toBeInTheDocument();
-  });
-  it('the button has a text "Próximo pokémon"', () => {
+  it('The filter buttons work', () => {
     renderWithRouter(<App />);
-    const buttonNextPokemon = screen.getByRole('link', {
-      name: proximoPokemon,
+    const buttonType = screen.getByRole('button', {
+      name: 'Psychic',
     });
-
-    expect(buttonNextPokemon).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Charmander = screen.getByText('Charmander');
-    expect(Charmander).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Caterpie = screen.getByText('Caterpie');
-    expect(Caterpie).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Ekans = screen.getByText('Ekans');
-    expect(Ekans).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
+    expect(buttonType).toBeInTheDocument();
+    userEvent.click(buttonType);
     const Alakazam = screen.getByText('Alakazam');
     expect(Alakazam).toBeInTheDocument();
 
-    userEvent.click(buttonNextPokemon);
+    const nextButton = screen.getByRole('button', {
+      name: proximoPokemon,
+    });
+    userEvent.click(nextButton);
     const Mew = screen.getByText('Mew');
     expect(Mew).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Rapidash = screen.getByText('Rapidash');
-    expect(Rapidash).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Snorlax = screen.getByText('Snorlax');
-    expect(Snorlax).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Dragonair = screen.getByText('Dragonair');
-    expect(Dragonair).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-    const Pikachu = screen.getByText('Pikachu');
-    expect(Pikachu).toBeInTheDocument();
-  });
-  it('The filter button works', () => {
-    renderWithRouter(<App />);
-    const buttonType = screen.getByRole('link', {
-      name: 'Fire',
-    });
-
-    expect(buttonType).toBeInTheDocument();
-    userEvent.click(buttonType);
-
-    const Charmander = screen.getByText('Charmander');
-    expect(Charmander).toBeInTheDocument();
-
-    const buttonNextPokemon = screen.getByRole('link', {
-      name: proximoPokemon,
-    });
-
-    expect(buttonNextPokemon).toBeInTheDocument();
-
-    userEvent.click(buttonNextPokemon);
-
-    const Rapidash = screen.getByText('Rapidash');
-    expect(Rapidash).toBeInTheDocument();
+    userEvent.click(nextButton);
+    expect(Alakazam).toBeInTheDocument();
   });
   it('The reset filter button works', () => {
     renderWithRouter(<App />);
-    const buttonTypeAll = screen.getByRole('link', {
-      name: 'All',
-    });
-
+    const buttonTypeAll = screen.getByRole('button', { name: 'All' });
     expect(buttonTypeAll).toBeInTheDocument();
     userEvent.click(buttonTypeAll);
-
     const Pikachu = screen.getByText('Pikachu');
     expect(Pikachu).toBeInTheDocument();
-
-    const buttonNextPokemon = screen.getByRole('link', {
+    const buttonNextPokemon = screen.getByRole('button', {
       name: proximoPokemon,
     });
-
     expect(buttonNextPokemon).toBeInTheDocument();
-
     userEvent.click(buttonNextPokemon);
     const Charmander = screen.getByText('Charmander');
     expect(Charmander).toBeInTheDocument();
   });
-  it('The reset filter button works', () => {
+  it('Each pokemon has a filter button works', () => {
     renderWithRouter(<App />);
-    const buttonTypeAll = screen.getByRole('link', {
-      name: 'All',
-    });
-    const buttonTypeFire = screen.getByRole('link', {
+    const buttonTypeAll = screen.getByRole('button', { name: 'All' });
+    const buttonTypeFire = screen.getByRole('button', {
       name: 'Fire',
     });
-    const buttonTypeEletric = screen.getByRole('link', {
-      name: 'Eletric',
+    const buttonTypeElectric = screen.getByRole('button', {
+      name: 'Electric',
     });
-    const buttonTypeBug = screen.getByRole('link', {
+    const buttonTypeBug = screen.getByRole('button', {
       name: 'Bug',
     });
-    const buttonTypePoison = screen.getByRole('link', {
+    const buttonTypePoison = screen.getByRole('button', {
       name: 'Poison',
     });
-    const buttonTypePsychic = screen.getByRole('link', {
+    const buttonTypePsychic = screen.getByRole('button', {
       name: 'Psychic',
     });
-    const buttonTypeNormal = screen.getByRole('link', {
+    const buttonTypeNormal = screen.getByRole('button', {
       name: 'Normal',
     });
-    const buttonTypeDragon = screen.getByRole('link', {
+    const buttonTypeDragon = screen.getByRole('button', {
       name: 'Dragon',
     });
-    expect(buttonTypeAll).toBeInTheDocument();
+
+    const seven = 7;
+    const pokemonTypeButton = screen.getAllByTestId('pokemon-type-button');
+    expect(pokemonTypeButton.length).toBe(seven);
+    // I had this idea taking a look at this repository:
+    // https://github.com/tryber/sd-010-b-project-react-testing-library/pull/140
+
     expect(buttonTypeFire).toBeInTheDocument();
-    expect(buttonTypeEletric).toBeInTheDocument();
+    expect(buttonTypeElectric).toBeInTheDocument();
     expect(buttonTypeBug).toBeInTheDocument();
     expect(buttonTypePoison).toBeInTheDocument();
     expect(buttonTypePsychic).toBeInTheDocument();
     expect(buttonTypeNormal).toBeInTheDocument();
     expect(buttonTypeDragon).toBeInTheDocument();
-
+    expect(buttonTypeAll).toBeVisible();
     userEvent.click(buttonTypeBug);
-    const buttonNextPokemon = screen.getByRole('link', { name: proximoPokemon,
+    const buttonNextPokemon = screen.getByRole('button', {
+      name: proximoPokemon,
     });
     expect(buttonNextPokemon).toBeDisabled();
   });
